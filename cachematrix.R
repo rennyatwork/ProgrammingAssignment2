@@ -1,24 +1,19 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
-
-areEqual <-function (pMatrix1, pMatrix2)
-{
-  is.matrix(pMatrix1) && is.matrix(pMatrix2) && dim(pMatrix1) == dim(pMatrix2) && all(pMatrix1 == pMatrix2)
-}
 
 
 ## Similarly to cacheMean, this function
 ## contains getters and setters
 makeCacheMatrix <- function(pMatrix = matrix()) {
 
-  
-  #cmMatrix <- pMatrix
+  ##cmInverse will hold CachedMatrix Inverse value
   cmInverse <- NULL
   
+  ## returns the "normal" matrix
   get <- function() pMatrix
   
+  ## sets the "normal" matrix and nulls the inverse
   set <- function (pMat)
   {
     #cmMatrix <<-pMatrix
@@ -26,8 +21,10 @@ makeCacheMatrix <- function(pMatrix = matrix()) {
     cmInverse <<-NULL
   }
   
+  ## returns the inverse matrix
   getInv <- function() cmInverse
   
+  ## sets the inverse matrix
   setInv <-function(pInv)
   {
     cmInverse <<-pInv
@@ -41,7 +38,10 @@ makeCacheMatrix <- function(pMatrix = matrix()) {
 ## looks for a cached version. If it can't find one
 ## it recalculates a new one and caches it
 cacheSolve <- function(pMatrix, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        ## Return a matrix that is the inverse of 'pMatrix'
+  
+  ##cmInverse receives cacheMatrix's inverse
+  ## if it has a value in cache, it will return the cached value
   cmInverse <- pMatrix$getInv()
   if(!is.null(cmInverse))
   {
@@ -49,6 +49,7 @@ cacheSolve <- function(pMatrix, ...) {
     return (cmInverse)
   }
   
+  ## otherwise, sets the inverse matrix
   cmInverse <- solve(pMatrix$get())
   pMatrix$setInv(cmInverse)
   return (cmInverse)
