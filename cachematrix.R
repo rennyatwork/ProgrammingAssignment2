@@ -25,9 +25,9 @@ makeCacheMatrix <- function(pMatrix = matrix()) {
   
   getInv <- function() cmInverse
   
-  setInv <-function()
+  setInv <-function(pInv)
   {
-    cmInverse <<-solve(cmMatrix)
+    cmInverse <<-pInv
   }
   
   list(get=get, set=set, getInv=getInv, setInv = setInv)
@@ -36,6 +36,16 @@ makeCacheMatrix <- function(pMatrix = matrix()) {
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
+cacheSolve <- function(pMatrix, ...) {
         ## Return a matrix that is the inverse of 'x'
+  cmInverse <- pMatrix$getInv()
+  if(!is.null(cmInverse))
+  {
+    print("[cached]")
+    return (cmInverse)
+  }
+  
+  cmInverse <- solve(pMatrix$get())
+  pMatrix$setInv(cmInverse)
+  return (cmInverse)
 }
