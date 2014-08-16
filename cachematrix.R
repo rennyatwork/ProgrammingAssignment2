@@ -6,7 +6,7 @@
 ## Similarly to cacheMean, this function
 ## contains getters and setters
 makeCacheMatrix <- function(pMatrix = matrix()) {
-
+  
   ##cmInverse will hold CachedMatrix Inverse value
   cmInverse <- NULL
   
@@ -38,7 +38,7 @@ makeCacheMatrix <- function(pMatrix = matrix()) {
 ## looks for a cached version. If it can't find one
 ## it recalculates a new one and caches it
 cacheSolve <- function(pMatrix, ...) {
-        ## Return a matrix that is the inverse of 'pMatrix'
+  ## Return a matrix that is the inverse of 'pMatrix'
   
   ##cmInverse receives cacheMatrix's inverse
   ## if it has a value in cache, it will return the cached value
